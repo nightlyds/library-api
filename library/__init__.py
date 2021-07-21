@@ -20,8 +20,13 @@ load_dotenv(dotenv_path)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+database_user = os.environ.get('POSTGRES_USER')
+database_password = os.environ.get('POSTGRES_PASSWORD')
+database_host = os.environ.get('POSTGRES_HOSTNAME')
+database_db = os.environ.get('POSTGRES_DB')
+
 app.config.update(
-    SQLALCHEMY_DATABASE_URI=os.environ.get('DATABASE_URI'),
+    SQLALCHEMY_DATABASE_URI=f'postgresql://{database_user}:{database_password}@{database_host}/{database_db}',
     SECRET_KEY=os.environ.get('SECRET_KEY'),
     SQLALCHEMY_TRACK_MODIFICATIONS=False,
     ENV=os.environ.get('ENV'),

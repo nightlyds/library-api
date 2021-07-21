@@ -22,7 +22,6 @@ class Pages(ResourseAuth):
         self.scheme = scheme
         self.message_name = message_name
 
-
     def get(self):
         instances = self.model.query.all()
 

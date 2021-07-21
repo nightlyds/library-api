@@ -20,6 +20,10 @@ COPY . ./library-api/
 
 # Set root dir
 ENV APP_HOME ./library-api
+WORKDIR $APP_HOME
 
-# Isntall requirements
-RUN pip install -r $APP_HOME/requirements.txt
+# Install requirements
+RUN pip install -r requirements.txt
+
+# Migrations
+ENTRYPOINT flask db init; flask db stamp head; flask db migrate; flask db upgrade; python3 run.py
